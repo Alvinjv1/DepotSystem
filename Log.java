@@ -1,9 +1,12 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public class Log {
-    private static Log instance = null;
-    private StringBuilder log;
+    private static Log instance;
+    private List<String> logEntries;
 
     private Log() {
-        log = new StringBuilder();
+        logEntries = new ArrayList<>();
     }
 
     public static Log getInstance() {
@@ -13,19 +16,11 @@ public class Log {
         return instance;
     }
 
-    public void addEvent(String event) {
-        log.append(event).append("\n");
+    public void addLog(String logEntry) {
+        logEntries.add(logEntry);
     }
 
-    public String getLog() {
-        return log.toString();
-    }
-
-    public void writeToFile(String filename) {
-        try (java.io.FileWriter writer = new java.io.FileWriter(filename)) {
-            writer.write(log.toString());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    public List<String> getLogEntries() {
+        return logEntries;
     }
 }
