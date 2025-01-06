@@ -1,26 +1,28 @@
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
 public class ParcelMap {
-    private Map<String, Parcel> parcels;
+    private Map<String, Parcel> parcelMap;
 
     public ParcelMap() {
-        this.parcels = new HashMap<>();
+        parcelMap = new HashMap<>();
     }
 
     public void addParcel(Parcel parcel) {
-        parcels.put(parcel.getId(), parcel);
+        parcelMap.put(parcel.getParcelId(), parcel);
     }
 
     public Parcel findParcelById(String parcelId) {
-        return parcels.get(parcelId);
+        return parcelMap.get(parcelId);
     }
 
+    public Collection<Parcel> getParcels() {
+        return parcelMap.values();
+    }
+
+    // Method to remove a parcel after it has been collected
     public void removeParcel(String parcelId) {
-        parcels.remove(parcelId);
-    }
-
-    public Map<String, Parcel> getParcels() {
-        return parcels;
+        parcelMap.remove(parcelId);
     }
 }
