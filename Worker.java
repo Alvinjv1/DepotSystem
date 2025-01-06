@@ -1,28 +1,31 @@
 public class Worker {
+    private QueueOfCustomers queueOfCustomers;
     private ParcelMap parcelMap;
 
-    public Worker(ParcelMap parcelMap) {
+    public Worker(QueueOfCustomers queueOfCustomers, ParcelMap parcelMap) {
+        this.queueOfCustomers = queueOfCustomers;
         this.parcelMap = parcelMap;
     }
 
-    public double calculateFee(Parcel parcel) {
-        double fee = parcel.getWeight() * 2; // Base fee based on weight
-        fee += parcel.getVolume() * 0.5;    // Additional fee based on volume
-        fee += parcel.getDaysInDepot() * 1; // Surcharge for days in depot
-        return fee;
+    public void processCustomer() {
+        Customer customer = queueOfCustomers.removeCustomer();
+        if (customer != null) {
+            Parcel parcel = parcelMap.findParcelById(customer.getParcelId());
+            if (parcel != null) {
+                double fee = calculateFee(parcel);
+                Log.getInstance().addLog("Customer " + customer.getName() + " collected parcel " + parcel.getParcelId() + " with fee " + fee);
+
+                // Remove the parcel from the map after it is collected
+                parcelMap.removeParcel(parcel.getParcelId());
+            } else {
+                Log.getInstance().addLog("Parcel " + customer.getParcelId() + " not found.");
+            }
+        }
     }
 
-    public void processCustomer(Customer customer) {
-        Parcel parcel = parcelMap.findParcelById(customer.getParcelId());
-        if (parcel == null || parcel.getStatus()) {
-            Log.getInstance().addEvent("Parcel ID " + customer.getParcelId() + " not found or already collected for customer: " + customer.getCustomerName());
-            return;
-        }
-
-        double fee = calculateFee(parcel);
-        Log.getInstance().addEvent("Processing customer: " + customer.getCustomerName() +
-                ", Parcel ID: " + parcel.getId() +
-                ", Fee: $" + fee);
-        parcel.setStatus(   true); // Update parcel status
+    public double calculateFee(Parcel parcel) {
+        // Basic fee calculation based on parcel attributes
+        double fee = parcel.getWeight() * 0.5 + parcel.getLength() * parcel.getWidth() * 0.2 + parcel.getDaysInDepot() * 0.1;
+        return fee;
     }
 }
