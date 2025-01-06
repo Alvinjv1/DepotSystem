@@ -1,30 +1,27 @@
 import java.util.LinkedList;
 import java.util.Queue;
 
-public class QueofCustomers {
+public class QueueOfCustomers {
     private Queue<Customer> customerQueue;
 
-    public QueofCustomers() {
+    public QueueOfCustomers() {
         this.customerQueue = new LinkedList<>();
     }
 
     public void addCustomer(Customer customer) {
-        customerQueue.add(customer);
+        customerQueue.offer(customer);
     }
 
-    public Customer processNextCustomer() {
-        return customerQueue.poll(); // Retrieves and removes the head of the queue(a method used from linked list)
+    public Customer removeCustomer() {
+        return customerQueue.poll();
     }
 
-    public boolean isEmpty() {
-        return customerQueue.isEmpty();
-    }
-
-    public int size() {
-        return customerQueue.size();
-    }
-
-    public Queue<Customer> getQueue() {
+    public Queue<Customer> getCustomers() {
         return customerQueue;
     }
+
+    public Customer get() {
+        return customerQueue.element();
+    }
 }
+
