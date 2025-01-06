@@ -1,60 +1,46 @@
 public class Parcel {
-    private String Id;
-    private int Height;
-    private double Weight;
-    private int Length;
-    private int Width;
-    private Boolean Status;
+    private String parcelId;
+    private int length;
+    private int width;
+    private int height;
+    private double weight;
     private int daysInDepot;
-    public Parcel(String Id , int daysInDepot, Double Weigh ,int High , int Len,int Width ){
-        this.Id = Id;
-        Height = High;
-        this.Width = Width;
-        Weight = Weigh;
-        Length = Len;
-        this.Status = false;//default
+
+    public Parcel(String parcelId, int length, int width, int height, double weight, int daysInDepot) {
+        this.parcelId = parcelId;
+        this.length = length;
+        this.width = width;
+        this.height = height;
+        this.weight = weight;
         this.daysInDepot = daysInDepot;
-
-
-
-
-
-
-    }
-    public int getDaysInDepot (){
-        return  daysInDepot;
-    }
-    public void setDaysInDepot(int days){
-        this.daysInDepot = days;
-    }
-    public int getLength (){
-        return  Length;
-    }
-    public Double getWeight (){
-        return  Weight;
-    }
-    public int getWidth (){
-        return  Width;
-    }
-    public Boolean getStatus (){
-        return  Status;
-    }
-    public void setStatus (Boolean collected){
-        this.Status= collected;
-    }
-    public int getVolume (){
-        return  Height*Length*Width ;
-
-    }
-    public int getHeight (){
-        return  Height;
     }
 
-    public String getId() {
-        return Id;
+    public String getParcelId() {
+        return parcelId;
     }
-    public String toString(){
-        return "Parcel ID: "+Id + "\nDays in Depot: " +daysInDepot+ "\nWeight: "+Weight+"kg\nDimensions: " +
-                Length+"x"+Width+"x"+Height+"\nCollected: "+(Status? "Yes":"No");
+
+    public int getLength() {
+        return length;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public double getWeight() {
+        return weight;
+    }
+
+    public int getDaysInDepot() {
+        return daysInDepot;
+    }
+
+    @Override
+    public String toString() {
+        return "Parcel ID: " + parcelId + ", Dimensions: " + length + "x" + width + "x" + height + ", Weight: " + weight + ", Days in Depot: " + daysInDepot;
     }
 }
