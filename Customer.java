@@ -1,30 +1,28 @@
 public class Customer {
-    private int seqId;
-    private String customerName;
+    private int seqNo;
+    private String name;
     private String parcelId;
-    //private String seqId;
 
+    public Customer(int seqNo, String name, String parcelId) {
+        this.seqNo = seqNo;
+        this.name = name;
+        this.parcelId = parcelId;
+    }
 
+    public int getSeqNo() {
+        return seqNo;
+    }
 
-public Customer(int seqId , String name , String pId){
-    this.seqId = seqId;
-    customerName = name;
-    parcelId =pId;
-}
-
-    public String getCustomerName() {
-        return customerName;
+    public String getName() {
+        return name;
     }
 
     public String getParcelId() {
         return parcelId;
     }
 
-    public int getSeqId() {
-        return seqId;
-    }
     @Override
     public String toString() {
-        return "Customer SeqNo: " + seqId + ", Name: " + customerName + ", Parcel ID: " + parcelId;
+        return seqNo + " " + name + " " + parcelId;
     }
 }
